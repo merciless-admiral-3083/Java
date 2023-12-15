@@ -1,6 +1,12 @@
 // OOP IN JAVA
 //SEE VIDEO NO 39 STATIC BLOCK IN JAVA
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 class Calculator // we created a new class named calcualtor
 {
   
@@ -314,7 +320,7 @@ interface Uno //the condition with interface is that whatever you define in it l
   void show();
   void config();
 }
-class Duo implements Uno
+class Duo implements Uno 
 {
   public void show()
   {
@@ -357,10 +363,147 @@ class Pent implements Tres,Quad
   }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-enum Status //enum helps define  some things like activity
+enum Status 
+//enum helps define something like an activity or table of content, enum is a class in itself
 {
   Running, Jogging, Walking, Passing
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class David
+{
+  public void showTheDataWhichBelongsToThisClass() //bug is something where the code is initially correct but it does not satisfy our expected output, example here if i remove  s from Belongs in class David then the code is correct
+  //but i will not get the output "in Goggins show" because the text on line 367 and line 376 are different, these errors are called BUGS
+  {
+    System.out.println( "in David show");
+  }
+}
+class Goggins extends David //extends means we are adding a sub part of the initial class
+{
+  @Override //override helps us identify those bugs by telling us that you might be expecting the output to be "in goggins show" but you are not getting the same in output
+  public void showTheDataWhichBelongsToThisClass()
+  {
+    System.out.println( "in Goggins show");
+  }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@FunctionalInterface
+interface Jeff //Functional interface can contain only 1 value data
+{
+  void showoff();
+  //void showoff1(int a20); this cant be processed as only 1 data is allowed
+}
+@FunctionalInterface
+interface Bezoz
+{
+   void showoff1(int a20);
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class JazzException extends Exception //this is custom exception named JazzException, we extended it to Exception because we need custom exception to gather all properties of 
+//Exception class, we can do the same by extending it to runtime class
+{
+  public JazzException(String JazzString) //we tell that JazzException will contain a string named jazzstring
+  {
+    super(JazzString); //we used superclass because ONLY EXCEPTION CLASS CAN HELP US GET THE JAZZSTRING TEXT PRINTED AND SUPER STATEMENT HELPS US IN IT
+  }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class Guatemala 
+{
+  public void Country() throws ClassNotFoundException //It means that when we dont have a class named India then ann error will be thrown, we need not give extra information/text for it, and it is called throws statement
+  {
+    Class.forName("India");
+  }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class USA extends Thread //this is used to create alternate text like it will print Hi 10 times then hello 10 times in alternate manner
+{ //NOTE, it might generate Hi 5 times initially then hello 7 times and then hi 8 times etc, i.e. its number of generate is unknown
+  public void run() //to run/use a thread we use run()
+  {
+    for(int alop=1;alop<=50;alop++)
+    {
+      System.out.println("Hi");
+    }
+  }
+}
+class Canada extends Thread
+{
+  public void run()
+  {
+    for(int alop=1;alop<=50;alop++)
+    {
+      System.out.println("Hello");
+    }
+  }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Runnable is better than threads so prefer Runnable
+class Mexico extends Thread
+{
+  public void run()
+  {
+    for(int aloi=1;aloi<=5;aloi++)
+    {
+      //try {
+       // Thread.sleep(10);//i typed only this text and used quick fix for the rest, it helps delay the printing of Hi, now understand, Hi is placed above
+        //Hello which means it will be executed first in time than Hello and we delayed execution of Hi by 10 milliseconds
+        //⚠️I am not able to understand how to generate Hi and Hello alternatively, understand it from video #89⚠️
+      //} //catch (InterruptedException e) {
+       // e.printStackTrace();
+      //}
+      System.out.println("Hi");
+    }
+  }
+}
+class Brazil extends Thread
+{
+  public void run()
+  {
+    for(int aloi=1;aloi<=5;aloi++)
+    {
+      System.out.println("Hello");
+    }
+  }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//as an alternate to threads we can use runner function
+class France implements Runnable //we say extends for threads but  we use implements for runnable
+{
+  public void run() //same run() for both thread and runnable
+  {
+    for(int o11=1;o11<=5;o11++)
+    {
+      System.out.println("Hi");
+      try {
+        Thread.sleep(10); //used to delay printing
+      } catch (InterruptedException e) { //work of quick fix haha
+        e.printStackTrace();
+      }
+    }
+  }
+}
+class Germany implements Runnable
+{
+  public void run()
+  {
+    for(int o11=1;o11<=5;o11++)
+    {
+      System.out.println("Hello");
+      try {
+        Thread.sleep(10);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+sealed class japan permits America, Russia //sealed class are type of advanced final class where we can permit selected classes for the data
+{}
+final class America extends japan //the class which has permit must be sealed/non-sealed/final
+{}
+non-sealed class Russia extends japan //these classes which have permit an are finaal cannot be used by otheer classes, to let them access data of classes with permit you need to make class non-sealed
+{}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //class to class = extends
 //class to interface = implements
@@ -551,13 +694,15 @@ public class OOP  // it is public class i.e. its main class
     System.out.println("********************************************************************************************************************************************************************************************16");
     //INSTEAD OF SAYING 'ABSTRACT PUBLIC' WE CAN ALSO ENTION 'INTERFACE' AND WHEN WE MENTION INTERFACE WE NEED TO REPLACE 'EXTENDS' TO 'IMPLEMENTS'
     Uno objUno = new Duo();
+    {
     objUno.show();
     objUno.config();
+    }
     //Uno.area = "Singapore"; then it will show error because any variab;le inserted in interface is final and  static and cant be changed
     System.out.println(Uno.area);
     System.out.println("********************************************************************************************************************************************************************************************17");
     Status nineeleven = Status.Running; //nine eleven is anything random, Running is the activity we defined in enum
-    System.out.println(nineeleven.ordinal()); //ordinal tells the location of 'Running' in the enum class
+    System.out.println(nineeleven.ordinal()); //ordinal tells us the location of 'Running' in the enum class
     //if we want to know position of all things available in the class we do as follows
     Status [] ss = Status.values();
     for (Status hello : ss)
@@ -576,6 +721,242 @@ public class OOP  // it is public class i.e. its main class
     System.out.println("Wogging is good");
       else
       System.out.println("Passing is good");
+    System.out.println("********************************************************************************************************************************************************************************************18");
+    {
+    Goggins objGoggins = new Goggins();
+    objGoggins.showTheDataWhichBelongsToThisClass();
+    }
+    System.out.println("********************************************************************************************************************************************************************************************19");
+    // Jeff Jeffobj = new Jeff() 
+    // {
+    //   public void showoff()
+    //   {
+    //     System.out.println("WE DID IT!");
+    //   }  
+    // };
+    // Jeffobj.showoff();
+    //I commented this out as you need to see the below line
+    Jeff Jeffobj = () -> System.out.println("WE DID IT AGAIN"); //this is example of functional interface where i changed the data in ANOTHER class  
+                                //whenever we use functional interface i.e. an interface which can be overwritten by another data, we can use '() ->' which means Lambda
+    Jeffobj.showoff(); //we just printed it
+    System.out.println("********************************************************************************************************************************************************************************************20");
+      Bezoz Bezozobj = a20 -> System.out.println("INTERFACE" + a20); // functional interface for integers
+      Bezozobj.showoff1(7);
+    System.out.println("********************************************************************************************************************************************************************************************21");
+    //exception is when we put something wrong in the code and an error occurs, exception handling means solving or skipping those errors
+    int ottoman = 5; //we put value of ottoman as 5
+    int empire = 0; //JUST REMEMBER that initially the value of this variable is 0
+    try 
+    { //try means that we know there MIGHT be an error here but we still are trying to execute the code, if the error comes then catch is used
+      empire = 10/ottoman; //we used the equation where if we put 0 = ottoman then we know error will occur which is covered under catch statement
+    }
+    catch(Exception Roman) //this meane to catch and handle the error we are going to have, we use 'Exception' statement to tell that there is an exception which MAY occur, we named exception as Roman, Exception is a class in itself
+    {
+      System.out.println("Something went wrong..."); //this tells that when we try and get an error then the error must be catched and the print statment's text will be displayed
+    }
+    System.out.println(empire); //we are printing the output we will get when we put the formula present at line 638
+    System.out.println("GOOD JOB!"); //if everything goes fine then catch statment will not be printed/used instead we will get the output "GOOD JOB!"
+    System.out.println("********************************************************************************************************************************************************************************************22");
+    int german = 0;  //same formula as above
+    int  Genocide = 0; //same thing
+    int numericals[] = new int[5]; //we made an array where we set its length to 5
+    //String Sterons = null; //we set a string with no lengthm I COMMENTED THIS AND LINE 654 because, it was showing yellow line for a reason that we are intentionally generating the code, WE KNOW WHAT WE ARE DOING LOL
+    try
+    {
+      Genocide = 18/german; //this is arithematic calculation and any error related to this is known as arithematic error
+      //System.out.println(Sterons.length()); //we are fetching the length of the string which has no length, we know there will be an error, we will get normal Exception statament in error
+      //System.out.println(numericals[1]); //just for telling/revision that when we dont put value inside the array the default value is 0, you can try printing it we will get 0
+      System.out.println(numericals[6]); //the array cannot have 6 values as it is out of bound, so Array Index Out Of Bound Exception will occur
+      if(Genocide==0) 
+      throw new ArithmeticException(); //throw means show this statment when error occurs, new means the bridge we create
+      else
+      System.out.println("You are on the correct path");
+    }
+    catch(ArithmeticException e) // e can be used for many exceptions at once, this error handling is used for mathematical error,⚠️ IT IS THE FIRST PRIORITY OF ERROR, if this error occurs then ALL THE BELOW STATEMENTS WILL NOT BE EXECUTED⚠️
+    {
+      System.out.println("Arithematic exception e... and Genocide==0 is the default value" + e); //we mention +e because we want to tell user what error they are facing
+    }
+    catch(ArrayIndexOutOfBoundsException e) //used for array error, it is second priority and we can set it as first priority by putting Arithematic Exceeption below Array... exception
+    {
+      System.out.println("Array index out of bounds" + e);
+    }
+    catch(Exception e) // IT IS THE PARENT/MAIN class under which the above two catch statments occur, when no two errors of the above occur but there is an error present then this statement gets executed
+    { //⚠️Exception class must be present at the bottom, i.e. below all catch statements⚠️
+      System.out.println("Catch exception e" + e);
+    }
+    System.out.println(Genocide);
+    System.out.println("********************************************************************************************************************************************************************************************23");
+    // WE CAN CREATE OUR OWN CUSTOM EXCEPTION, i created a seperate class for this, see classes on top for this
+    int qwert = 20;
+    int yuiop = 0;
+    try
+    {
+      yuiop = 18/qwert;
+      if (yuiop==0)
+      throw new JazzException("I dont wanna get here!");
+    }
+    catch(JazzException z)
+    {
+      
+      System.out.println("Something went wrong..." + z);
+    }
+    System.out.println("********************************************************************************************************************************************************************************************24");
+    Guatemala GuatemalaObject = new Guatemala();
+    try { //I USED QUICK FIX i.e. when you hover mouse on error it shows quick fix the below text came from there
+      GuatemalaObject.Country();
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace(); //this will show all the things which cause error
+    }
+    System.out.println("********************************************************************************************************************************************************************************************25");
+    //Now we will learn how to get input from user
+    Scanner Vietnam = new Scanner(System.in); //just liek we create link between classes we need o create link for things to come under input requirements
+
+    System.out.println("Enter your name: ");
+    String yournameString = Vietnam.nextLine(); //.nextLine is used when we ask for input of a String statement, we can give our input in the next line of the question
+
+    System.out.println("Enter your age: ");
+    int yourageString = Vietnam.nextInt(); //used when we ask for a number input
+    System.out.println("Hello, " + yournameString + "! You are " + yourageString + " years old.");
+    Vietnam.close(); //we need to close the input statement and it is necessary!
+    //If you have free time then see video 83
+    System.out.println("********************************************************************************************************************************************************************************************26");
+    //Threads, Runnable(which i will do below is better than threads so prefer it)
+    // USA USAObj = new USA();
+    // Canada CanadaObj = new Canada();
+
+    // USAObj.start();
+    // CanadaObj.start();
+    System.out.println("********************************************************************************************************************************************************************************************27");
+    //BY THIS WE CAN CREATE HI AND HELLO ALTERNATIVELY
+    Runnable France1 = new France(); //we need to create link between runnables as we did
+    Runnable Germany1 = new Germany();
+    
+    Thread France2 = new Thread(France1);  //we have to create a link of threads between Runnable and Threads object
+    Thread Germany2 = new Thread(Germany1);
+    France2.start(); //we need to mention .start for it to run
+    Germany2.start(); 
+    System.out.println("********************************************************************************************************************************************************************************************28");
+    //SEE VIDEO #89 AGAIN
+    System.out.println("********************************************************************************************************************************************************************************************29");
+    //WE CAN CREATE AN ARRAY LIST without many efforts
+    Collection<Integer> numericals_1 = new ArrayList<Integer>();
+    //Set<Integer> numericals_1 = new HashSet<Integer>();
+    //this helps us sort the vaalue of the array list in proper individual manner but not in ascending order
+    //Collection<Integer> numericals_1 = new TreeSet<Integer>();
+    //they arrange the data in ascending order
+    numericals_1.add(1);
+    numericals_1.add(2);
+    numericals_1.add(3);
+    numericals_1.add(4);
+    numericals_1.add(5);
+    System.out.println(numericals_1);
+    //we can extract indiviual numbers of the array list by the following 
+    for(Object p11 : numericals_1)//we can extract indiciual numbers of the array list by the following 
+    {
+      System.out.println(p11);
+      int lkj = (Integer)p11; //we need ot put this to perform maths on the whole array
+      System.out.println(lkj*2);
+    }
+    System.out.println("********************************************************************************************************************************************************************************************30");
+    Map<String, Integer> studentsMap = new Hashtable<>(); //Map helps present data in square prackets, hashtable helps us sort the data
+    studentsMap.put("Jaspreet", 18); //we put values for data
+    studentsMap.put("Alfred",25);
+    studentsMap.put("Alexander", 50);
+    studentsMap.put("Jonathan", 21);
+    studentsMap.put("Chris", 17);
+    studentsMap.put("Jaspreet", 20); //the least will have the highest priority, if Jaspreet is written twice then bottom values will be given preference
+    System.out.println(studentsMap.keySet());//we use it to extract values
+    System.out.println(studentsMap.values());
+    for(String key : studentsMap.keySet()) //we used it to form a presentable thing, run the code to see the good looking output
+    {
+      System.out.println(key + " : " + studentsMap.get(key));
+    }
+    System.out.println("********************************************************************************************************************************************************************************************31");
+    //see video #95 comparator and comparable
+    System.out.println("********************************************************************************************************************************************************************************************32");
+     
+    List<Integer> humanity = Arrays.asList(1,2,3,4,5,6); //this helps us display the entries one below other in sorted form and noot in form of table
+    for (int neon : humanity)
+    {
+      System.out.println(neon);
+    }
+
+    int neo = humanity.stream() //stream is somethign which helps us sort the data and we prefer stream because we can do more than 1 operations in stream, the drawback is that stream can be only used once with multiple operations possible
+                      .filter(goa -> goa%2==0) //we can filter by using maths that if we divide the number of the list and wwe get remainder as 0 then print those numbers, % means remainder
+                      .sorted() //it sorts the data in ascending order of the utput of .filter 
+                      .map(goa -> goa*2) //by the help of this we can print a map form of the data including out requirements in it
+                      .reduce(0, (cold,winter) -> cold+winter); //identity:0 means starting from 0 position, we need to first add 1+2 as c=1 and 2=2, then 3+3 c=3 e = 3 and so on till last value, hence we get sum of all values of list as 21
+    System.out.println(neo);
+    System.out.println("********************************************************************************************************************************************************************************************33");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
